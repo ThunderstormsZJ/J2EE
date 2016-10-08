@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 开发模式,在改变xml文件的情况下不用重新部署项目-->
+	<constant name="struts.devMode" value="true" />
+	<!-- 使用感叹号方式动态方法要设为true -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- 要通过ognl访问静态方法,需设为true -->
+	<!-- <constant name="struts.ognl.logMissingProperties" value="true" /> -->
+	<!-- 中文问题 -->
+	<!-- <constant name="struts.i18n.encoding" value="GBK" /> -->
+			
+	<package name="actionGuide" namespace="/" extends="struts-default">
+		<!-- 当没有找到指定action文件时，会使用默认的action文件 -->
+		<!-- <default-action-ref name="index" /> -->
+		<!-- 全局的转发页面 -->
+		<!-- <global-results>
+            <result name="error">/WEB-INF/jsp/error.jsp</result>
+        </global-results> -->
+        
+	 	<action name="action_ognl" class="deity.domain.ognl.OgnlAction">
+            <result>view_01/action_ognl.jsp</result>
+        </action>
+        
+	 	<action name="access_*" class="deity.domain.access.{1}Action">
+            <result>view_result/access_result.jsp</result>
+        </action>
+
+        <action name="param_*" class="deity.domain.param.{1}Action">
+            <result>view_result/show_result.jsp</result>
+        </action>
+        
+        <action name="*_*" class="deity.domain.actionGuide.MainAction" method="{2}">
+            <result>view_01/{1}_{2}.jsp</result>
+        </action>
+    </package>
+    <!-- 还标签会将其它的xml配置文件包含进来 -->
+   	<include file="deity/domain/result/result.xml"/>
+<!-- 
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <package name="default" namespace="/" extends="struts-default">
+        <default-action-ref name="index" />
+        <global-results>
+            <result name="error">/WEB-INF/jsp/error.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+        <action name="index">
+            <result type="redirectAction">
+                <param name="actionName">HelloWorld</param>
+                <param name="namespace">/example</param>
+            </result>
+        </action>
+    </package>
+    <include file="example.xml"/> -->
+</struts>

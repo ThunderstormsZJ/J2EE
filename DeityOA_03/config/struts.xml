@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.action.extension" value="action" />
+    <constant name="struts.ui.theme" value="simple" />
+	
+    <!-- <package name="default" namespace="/" extends="struts-default">
+    	<action name="*_*" class="{1}" method="{2}">
+    		<result name="tolist" type="redirectAction">{1}_list</result>
+    		<result name="{2}">/WEB-INF/view/{1}/{2}UI.jsp</result>
+    	</action>
+    </package> -->
+    <!-- 基本的action -->
+    <package name="common" extends="struts-default" abstract="true">
+    	<interceptors>
+    		<interceptor name="checkPriviledgeUrl" class="com.deity.oa.interceptor.CheckPriviledgeUrlInterceptor"/>
+    			
+    		<interceptor-stack name="defaultStack">
+    			<interceptor-ref name="checkPriviledgeUrl"/>
+    			<interceptor-ref name="defaultStack"/>
+    		</interceptor-stack>
+    	</interceptors>
+    	<!-- 全局页面 -->
+    	<global-results>
+    		<!-- 转到首页 -->
+    		<result name="toHome" type="redirectAction">
+    			<param name="namespace">/home</param>
+    			<param name="actionName">homeAction_index</param>
+    		</result>
+    		<result name="toErrorUI">/errorUI.jsp</result>
+    		<result name="loginUI">/WEB-INF/view/userAction/loginUI.jsp</result>
+    	</global-results>
+    </package>
+    <!-- 首页 -->
+    <package name="home" namespace="/home" extends="common">
+    	<action name="homeAction_*" class="homeAction" method="{1}">
+    		<result name="{1}">/WEB-INF/view/homeAction/{1}.jsp</result>
+    	</action>
+    </package>
+    <!-- 系统模块 -->
+    <package name="system" namespace="/sys" extends="common">
+	    <!-- 岗位的管理 -->
+    	<action name="roleAction_*" class="roleAction" method="{1}">
+    		<result name="list">/WEB-INF/view/roleAction/list.jsp</result>
+    		<result name="saveUI">/WEB-INF/view/roleAction/saveUI.jsp</result>
+    		<result name="setPriviledgeUI">/WEB-INF/view/roleAction/setPriviledgeUI.jsp</result>
+    		<result name="toPriviledgeUI" type="redirectAction">roleAction_setPriviledgeUI?id=${id}</result>
+    		<result name="tolist" type="redirectAction">roleAction_list</result>
+    	</action>
+    	<!-- 部门的管理 -->
+    	<action name="deptAction_*" class="deptAction" method="{1}">
+    		<result name="list">/WEB-INF/view/deptAction/list.jsp</result>
+    		<result name="saveUI">/WEB-INF/view/deptAction/saveUI.jsp</result>
+    		<result name="tolist" type="redirectAction">deptAction_list?parentId=${parentId}</result>
+    	</action>
+    	<!-- 用户的管理 -->
+    	<action name="userAction_*" class="userAction" method="{1}">
+    		<result name="list">/WEB-INF/view/userAction/list.jsp</result>
+    		<result name="saveUI">/WEB-INF/view/userAction/saveUI.jsp</result>
+    		<result name="logout">/WEB-INF/view/userAction/logOut.jsp</result>
+    		<result name="tolist" type="redirectAction">userAction_list</result>
+    	</action>
+    </package>
+    <!-- 网上交流模块 -->
+    <package name="chatOnline" namespace="/co" extends="common">
+    	<!-- 论坛管理 -->
+    	<action name="forumManageAction_*" class="forumManageAction" method="{1}">
+    		<result name="list">/WEB-INF/view/forumManageAction/list.jsp</result>
+    		<result name="saveUI">/WEB-INF/view/forumManageAction/saveUI.jsp</result>
+    		<result name="tolist" type="redirectAction">forumManageAction_list</result>
+    	</action>
+    	<!-- 论坛模块 -->
+    	<action name="forumAction_*" class="forumAction" method="{1}">
+    		<result name="list">/WEB-INF/view/forumAction/list.jsp</result>
+    		<result name="listTopic">/WEB-INF/view/forumAction/listTopic.jsp</result>
+    	</action>
+    	<!-- 主题模块 -->
+    	<action name="topicAction_*" class="topicAction" method="{1}">
+    		<result name="addUI">/WEB-INF/view/topicAction/addUI.jsp</result>
+    		<result name="listReplys">/WEB-INF/view/topicAction/listReplys.jsp</result>
+    		<result name="toListTopics" type="redirectAction">forumAction_listTopics?id=${forumId}</result>
+    	</action>
+    	<!-- 回复模块 -->
+    	<action name="replyAction_*" class="replyAction" method="{1}">
+    		<result name="addUI">/WEB-INF/view/replyAction/addUI.jsp</result>
+    		<result name="toListReplys" type="redirectAction">topicAction_listReplys?id=${topicId}&amp;forumId=${forumId}</result>
+    	</action>
+    </package>
+</struts>

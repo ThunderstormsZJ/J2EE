@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 开发模式,在改变xml文件的情况下不用重新部署项目-->
+	<constant name="struts.devMode" value="true" />
+	<!-- 使用感叹号方式动态方法要设为true -->
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+			
+	<package name="user" namespace="/" extends="struts-default">
+	 	<action name="user_action" class="userAction">
+            <result name="success">register_success.jsp</result>
+            <result name="fail">register_fail.jsp</result>
+            <result name="list">register_list.jsp</result>
+            <result name="detail">register_detail.jsp</result>
+        </action>
+    </package>
+<!-- 
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.devMode" value="true" />
+    <package name="default" namespace="/" extends="struts-default">
+        <default-action-ref name="index" />
+        <global-results>
+            <result name="error">/WEB-INF/jsp/error.jsp</result>
+        </global-results>
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+        <action name="index">
+            <result type="redirectAction">
+                <param name="actionName">HelloWorld</param>
+                <param name="namespace">/example</param>
+            </result>
+        </action>
+    </package>
+    <include file="example.xml"/> -->
+</struts>

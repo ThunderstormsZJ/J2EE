@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- <constant name="struts.ognl.logMissingProperties" value="true" /> -->
+	<package name="admin" namespace="/admin" extends="struts-default">
+		<default-action-ref name="index"/>
+	 	<action name="index">
+            <result>admin/index.html</result>
+        </action>
+	 	<action name="*_*" class="deity.domain.control.AdminAction" method="{2}">
+            <result>{1}_{2}.jsp</result>
+        </action>
+    </package>
+			
+	<package name="font" namespace="/" extends="struts-default">
+		<default-action-ref name="index" />
+	 	<action name="index" class="deity.domain.control.CategoryAction">
+            <result>index.jsp</result>
+        </action>
+    </package>
+</struts>

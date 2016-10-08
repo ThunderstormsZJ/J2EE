@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="deity.domain.associationM.b_one2many_xml">
+	<class name="Employee" table="emp">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+		<property name="name" type="string" column="name"/>
+		<many-to-one name="department" column="dept_id"></many-to-one>
+	</class>
+</hibernate-mapping>
+

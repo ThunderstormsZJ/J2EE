@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+			
+	<package name="result" namespace="/" extends="struts-default">
+		<action name="dispatcher" class="deity.domain.result.ResultAction">
+            <result type="dispatcher">view_resulttype/dispatcher.jsp</result>
+        </action>
+		<action name="redirect" class="deity.domain.result.ResultAction">
+            <result type="redirect">view_resulttype/redirect.jsp</result>
+        </action>
+		<action name="chain" class="deity.domain.result.ResultAction">
+            <result type="chain">dispatcher</result>
+        </action>
+		<action name="redirectAction" class="deity.domain.result.ResultAction">
+            <result type="redirectAction">redirect</result>
+        </action>
+        
+		<!-- <action name="dynamicresult" class="deity.domain.result.DynamicResultAction">
+            <result>${dynamicUrl}</result>
+        </action>
+        
+        <action name="dynamicresultR" class="deity.domain.result.DynamicResultAction">
+            <result type="redirect">view_resulttype/success.jsp?type=${type}</result>
+        </action> -->
+    </package>
+</struts>

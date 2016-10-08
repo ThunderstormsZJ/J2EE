@@ -1,0 +1,36 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- 1、数据库信息:数据库方言 (是一个类的全面)与数据库连接的信息-->
+		<property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+		<property name="connection.url">jdbc:mysql:///hibernate_4.0</property>
+		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">950317</property>
+		
+		<!-- 2、 其它配置-->
+		<!-- 显示sql语句-->
+		<property name="show_sql">true</property>
+		<!-- 格式化显示sql语句-->
+		<!-- <property name="format_sql">true</property> -->
+		<!-- 
+			自动建表参数：
+				update:表结构不一致就会创建或者更新
+				create:会在每次的操作之前从新建表,数据会被清空
+				create-drop:启动时会自动见建表,退出后会删除表
+				validate:每次启动会验证表结构,不一致会抛出异常
+		 -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		
+		<!-- 3、映射文件 -->
+		<!-- <mapping resource="deity/domain/a_helloworld/User.hbm.xml"/> -->
+		<!-- <mapping class="deity.domain.a_helloworld.Teacher"/> -->
+		<!-- <mapping class="deity.domain.c_hbm2ddl.Student"/> -->
+		<!-- <mapping class="deity.domain.d_valuetypes.RegisterByAn"/> -->
+		<!-- <mapping class="deity.domain.e_id.Teacher"/> -->
+		<mapping class="deity.domain.f_id_composite.Teacher"/>
+	</session-factory>
+</hibernate-configuration>

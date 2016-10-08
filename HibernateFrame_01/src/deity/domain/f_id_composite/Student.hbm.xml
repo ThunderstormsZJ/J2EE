@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="deity.domain.f_id_composite">
+	<class name="Student" table="student">
+		<composite-id name="com_FK" class="Com_FK">
+			<key-property name="id"/>
+			<key-property name="name"/>
+		</composite-id>
+		<property name="age"/>
+		<property name="subject"/>
+	</class>
+</hibernate-mapping>
+
